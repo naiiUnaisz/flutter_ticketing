@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ticketing/core/components/spaces.dart';
 import 'package:flutter_ticketing/core/constants/colors.dart';
+import 'package:flutter_ticketing/core/extensions/extensions.dart';
+import 'package:flutter_ticketing/ui/home/models/product_model.dart';
 
 class OrderCard extends StatelessWidget {
-  const OrderCard({super.key});
+  final ProductModel item;
+  const OrderCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +48,27 @@ class OrderCard extends StatelessWidget {
                 onTap: () {
                   quantityNotifier.value++;
                 },
-                child: Icon(
-                  Icons.add,
-                  color: AppColors.primary,
-                ),
+                child: Icon(Icons.add, color: AppColors.primary),
+              ),
+            ],
+          ),
+          Text(item.type, style: const TextStyle(fontSize: 12.0)),
+          const SpaceHeight(8.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                item.price.currencyFormatRp,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              ValueListenableBuilder(
+                valueListenable: quantityNotifier,
+                builder: (context, value, _) {
+                  return Text(
+                    (item.price * value).currencyFormatRp,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  );
+                },
               ),
             ],
           ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ticketing/core/components/components.dart';
-import 'package:flutter_ticketing/core/constants/colors.dart'; 
+import 'package:flutter_ticketing/core/constants/colors.dart';
+import 'package:flutter_ticketing/core/extensions/build_context_ext.dart';
+import 'package:flutter_ticketing/ui/home/pages/mainpage.dart'; 
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -54,7 +56,9 @@ class LoginPage extends StatelessWidget {
                           isOutlineBorder: false,
                         ),
                         const SpaceHeight(86.0),
-                        Button.filled(onPressed: () {}, label: "login"),
+                        Button.filled(onPressed: ()  {
+                         context.pushReplacement(Mainpage());
+                        }, label: "login"),
                         const SpaceHeight(128.0),
                         Center(
                           child: Image.asset(
